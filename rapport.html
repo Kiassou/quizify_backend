@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport Technique Quizify</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; color: #333; line-height: 1.6; margin: 40px; }
+        .header { background: #2c3e50; color: white; padding: 20px; text-align: center; border-radius: 8px; }
+        h2 { color: #2980b9; border-bottom: 2px solid #3498db; padding-bottom: 5px; margin-top: 30px; }
+        .card { background: #f4f7f6; border-left: 5px solid #3498db; padding: 15px; margin: 10px 0; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th { background: #3498db; color: white; padding: 10px; text-align: left; }
+        td { border-bottom: 1px solid #ddd; padding: 10px; font-size: 14px; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .badge { padding: 4px 8px; border-radius: 4px; color: white; font-weight: bold; font-size: 12px; }
+        .post { background: #49cc90; } .get { background: #61affe; } .delete { background: #f93e3e; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Projet Quizify</h1>
+        <p>Architecture Backend & API REST - Développé par Maurice</p>
+    </div>
+
+    <h2>1. Présentation du Projet</h2>
+    <div class="card">
+        <strong>Environnement :</strong> Debian Linux | Java Spring Boot | MySQL | Hibernate
+        <br><strong>Objectif :</strong> Créer une plateforme de quiz complète avec calcul automatique des scores.
+    </div>
+
+    <h2>2. Documentation des Endpoints</h2>
+    
+    <h3>Utilisateurs</h3>
+    <table>
+        <tr><th>Méthode</th><th>Endpoint</th><th>Description</th></tr>
+        <tr><td><span class="badge post">POST</span></td><td>/users/register</td><td>Inscription (Email/User uniques)</td></tr>
+        <tr><td><span class="badge post">POST</span></td><td>/users/login</td><td>Authentification simple</td></tr>
+    </table>
+
+    <h3>Scores & Algorithmes</h3>
+    <table>
+        <tr><th>Méthode</th><th>Endpoint</th><th>Description</th></tr>
+        <tr><td><span class="badge post">POST</span></td><td>/scores/calculate/{qId}/{uId}</td><td>Calcul intelligent du score</td></tr>
+        <tr><td><span class="badge get">GET</span></td><td>/scores/user/{id}/history</td><td>Historique complet par utilisateur</td></tr>
+        <tr><td><span class="badge delete">DELETE</span></td><td>/scores/{id}</td><td>Suppression d'un score</td></tr>
+    </table>
+
+    <h2>3. Points Forts</h2>
+    <ul>
+        <li><strong>Calcul Côté Serveur :</strong> Sécurité accrue (le client ne peut pas tricher sur son score).</li>
+        <li><strong>Architecture Propre :</strong> Relations ManyToOne/OneToMany maîtrisées.</li>
+        <li><strong>Gestion des Circularités :</strong> Utilisation de @JsonIgnore pour des réponses API fluides.</li>
+    </ul>
+</body>
+</html>

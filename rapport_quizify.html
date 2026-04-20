@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rapport Technique - API Quizify</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        line-height: 1.6;
+        margin: 40px;
+        background: #fff;
+      }
+      .header {
+        background: #2c3e50;
+        color: white;
+        padding: 30px;
+        text-align: center;
+        border-radius: 8px;
+        border-bottom: 5px solid #3498db;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 28px;
+      }
+      h2 {
+        color: #2980b9;
+        border-left: 5px solid #3498db;
+        padding-left: 15px;
+        margin-top: 40px;
+        text-transform: uppercase;
+        font-size: 20px;
+      }
+      h3 {
+        color: #2c3e50;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+        margin-top: 25px;
+      }
+      .card {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 15px 0;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      th {
+        background: #3498db;
+        color: white;
+        padding: 12px;
+        text-align: left;
+        font-size: 14px;
+      }
+      td {
+        border-bottom: 1px solid #ddd;
+        padding: 12px;
+        font-size: 13px;
+      }
+      tr:nth-child(even) {
+        background: #fdfdfd;
+      }
+      .badge {
+        padding: 4px 10px;
+        border-radius: 4px;
+        color: white;
+        font-weight: bold;
+        font-size: 11px;
+      }
+      .post {
+        background: #49cc90;
+      }
+      .get {
+        background: #61affe;
+      }
+      .delete {
+        background: #f93e3e;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 50px;
+        padding: 20px;
+        border-top: 1px solid #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>PROJET QUIZIFY</h1>
+      <p>Documentation Technique du Backend & Endpoints API</p>
+    </div>
+
+    <h2>1. Architecture & Technologies</h2>
+    <div class="card">
+      <strong>Stack :</strong> Java Spring Boot 3, MySQL, Hibernate/JPA, Debian
+      Linux.<br />
+      <strong>Concept :</strong> Système de gestion de quiz avec moteur de
+      calcul de score automatique et persistance des données.
+    </div>
+
+    <h2>2. Documentation des Endpoints</h2>
+
+    <h3>👤 Gestion des Utilisateurs</h3>
+    <table>
+      <tr>
+        <th>Méthode</th>
+        <th>Endpoint</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td><span class="badge post">POST</span></td>
+        <td>/users/register</td>
+        <td>
+          Inscription + <span class="service-tag">Email de Bienvenue</span>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="badge post">POST</span></td>
+        <td>/users/login</td>
+        <td>Authentification des profils</td>
+      </tr>
+
+      <tr>
+        <td><span class="badge get">GET</span></td>
+        <td>/users/all</td>
+        <td>Liste de tous les utilisateurs</td>
+      </tr>
+      <tr>
+        <td><span class="badge get">GET</span></td>
+        <td>/users/{id}</td>
+        <td>Détails d'un compte précis</td>
+      </tr>
+      <tr>
+        <td><span class="badge post">POST</span></td>
+        <td>/users/forgot-username</td>
+        <td>
+          <span class="service-tag">Récupération</span> : Envoi de l'identifiant
+          par email
+        </td>
+      </tr>
+      <tr>
+        <td><span class="badge delete">DELETE</span></td>
+        <td>/users/{id}</td>
+        <td>Suppression de compte</td>
+      </tr>
+    </table>
+
+    <h3>📁 Gestion des Catégories</h3>
+    <table>
+      <tr>
+        <th>Méthode</th>
+        <th>Endpoint</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td><span class="badge get">GET</span></td>
+        <td>/categories/all</td>
+        <td>Liste toutes les thématiques</td>
+      </tr>
+      <tr>
+        <td><span class="badge post">POST</span></td>
+        <td>/categories/add</td>
+        <td>Ajouter une nouvelle thématiques</td>
+      </tr>
+      <tr>
+        <td><span class="badge delete">DELETE</span></td>
+        <td>/categories/{id}</td>
+        <td>Supprimer une thématique</td>
+      </tr>
+    </table>
+
+    <h3>📝 Gestion des Quiz & Questions</h3>
+    <table>
+      <tr>
+        <th>Méthode</th>
+        <th>Endpoint</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td><span class="badge get">GET</span></td>
+        <td>/quiz/all</td>
+        <td>Liste complète (Quiz + Questions + Choix)</td>
+      </tr>
+      <tr>
+        <td><span class="badge post">POST</span></td>
+        <td>/quiz/add</td>
+        <td>Création de quiz (Cascade All)</td>
+      </tr>
+      <tr>
+        <td><span class="badge delete">DELETE</span></td>
+        <td>/quiz/{id}</td>
+        <td>Suppression totale (Quiz et contenu)</td>
+      </tr>
+    </table>
+
+    <h3>📊 Scores & Algorithmes</h3>
+    <table>
+      <tr>
+        <th>Méthode</th>
+        <th>Endpoint</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td><span class="badge post">POST</span></td>
+        <td>/scores/calculate/{qId}/{uId}</td>
+        <td>
+          <strong>Calcul intelligent</strong> : Vérification et sauvegarde
+        </td>
+      </tr>
+      <tr>
+        <td><span class="badge get">GET</span></td>
+        <td>/scores/user/{id}/history</td>
+        <td>Historique complet des notes par utilisateur</td>
+      </tr>
+      <tr>
+        <td><span class="badge get">GET</span></td>
+        <td>/scores/all</td>
+        <td>Liste globale des performances</td>
+      </tr>
+      <tr>
+        <td><span class="badge delete">DELETE</span></td>
+        <td>/scores/{id}</td>
+        <td>Nettoyage de l'historique</td>
+      </tr>
+    </table>
+
+    <h3>🔔 Système de Notifications <span class="new-tag">NOUVEAU</span></h3>
+    <table>
+      <tr>
+        <th>Méthode</th>
+        <th>Endpoint</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td><span class="badge post">POST</span></td>
+        <td>/notifications/add</td>
+        <td>
+          <strong>Broadcast</strong> : Envoi d'une alerte à tous les
+          utilisateurs
+        </td>
+      </tr>
+      <tr>
+        <td><span class="badge get">GET</span></td>
+        <td>/notifications/all</td>
+        <td>Flux de notifications (trié par date de publication)</td>
+      </tr>
+      <tr>
+        <td><span class="badge delete">DELETE</span></td>
+        <td>/notifications/{id}</td>
+        <td>Suppression d'une notification archivée</td>
+      </tr>
+    </table>
+
+    <h2>3. Synthèse de l'Expertise Technique</h2>
+    <div class="card">
+      <strong>Communication :</strong> Intégration de
+      <code>JavaMailSender</code> avec templates <b>HTML/CSS</b> pour une
+      expérience utilisateur professionnelle dès l'inscription.<br /><br />
+      <strong>Algorithmique :</strong> Implémentation d'un moteur de correction
+      côté serveur pour garantir l'intégrité des résultats et des
+      statistiques.<br /><br />
+      <strong>Optimisation :</strong> Gestion des relations bidirectionnelles
+      via <code>@JsonIgnore</code> pour des réponses API JSON légères et
+      rapides.
+    </div>
+  </body>
+</html>
