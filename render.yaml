@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: quizify-backend
+    env: java
+    buildCommand: "./mvnw clean install -DskipTests"
+    startCommand: "java -jar target/*.jar"
